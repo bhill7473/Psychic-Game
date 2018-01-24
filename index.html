@@ -1,20 +1,68 @@
-<!DOCTYPE html>
+<!Doctype html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
- <script type="text/javascript" src="pgame.js"></script> 
-<link type="text/css" href="/assets/style.css">
-<link type="text/css" src="assets/reset.css"
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-<h1>Psychic Game</h1>
-<div id="wins">Wins:</div>
-<div id="losses">Losses:</div>
-<div id="Guesses">Number of Guesses:</div>
-<div id="Letter Guessed">Letter Guessed:</div>
-<A HREF="javascript:history.go(0)">Refresh Game</A>
-
-
-
-
-
+  <div id="container">
+   <h1>Psychic Game</h1>
+  <div >
+   <h5 id="wins"></h5>
+  </div>
+  <div >
+   Guesses Left:<h5 id="guesses">10</h5>
+  </div>
+  </div>
+  <div >
+   Letters Guessed:<h5 id="guessed"></h5>
+  </div>
 </body>
+
+<script>
+  var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l',
+    'm','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+   // Variables for tracking our wins, losses and guesses. They begin at 0.
+
+   var wins = 0;
+   var losses = 0;
+   var guessesLeft = 10;
+   var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+   console.log(computerChoice);
+
+  document.onkeypress = function(event) {
+
+      var userGuess = event.key.toLowerCase();
+      console.log(userGuess);
+
+      if(userGuess == computerChoice){
+        $("#guessed").append(userGuess);
+        alert("YOU WIN");
+        guessesLeft == 10;
+        document.location.reload();
+        $("#wins").html(wins);
+        $("#guessed").html(userGuess);
+      }
+
+      else{
+        $("#guessed").append(userGuess);
+        --guessesLeft;
+        $("#guesses").html(guessesLeft);
+      }
+
+      if(guessesLeft == 0){
+        $("#guessed").append(userGuess);
+        alert("YOU LOSE");
+        document.location.reload();
+        $("#losses").html(losses);
+        $("#guessed").html(userGuess);
+      }
+
+
+
+    }
+</script>
+</html>
